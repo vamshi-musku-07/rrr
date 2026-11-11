@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { apiUrl } from "./api";
 
 type Player = "X" | "O";
 type Cell = Player | null;
@@ -48,7 +49,7 @@ export default function App() {
 
   const loadHistory = useCallback(async () => {
     try {
-      const res = await fetch("/api/games");
+      const res = await fetch(apiUrl("/api/games"));
       if (!res.ok) throw new Error("Could not load history");
       const data = (await res.json()) as GameRecord[];
       setHistory(data);
@@ -66,7 +67,7 @@ export default function App() {
     setSaving(true);
     try {
       const moves = finalBoard.filter(Boolean).length;
-      const res = await fetch("/api/games", {
+      const res = await fetch(apiUrl("/api/games"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

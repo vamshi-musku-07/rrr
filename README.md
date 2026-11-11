@@ -19,10 +19,16 @@ API: `http://localhost:5000`
 
 ## Frontend
 
+Create `frontend/.env` (already included locally):
+
+```
+VITE_API_URL=http://localhost:5000
+```
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-App: `http://localhost:5173` (proxies `/api` to the backend)
+App: `http://localhost:5173` — talks to the backend via `VITE_API_URL`.
